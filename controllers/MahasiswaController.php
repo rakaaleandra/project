@@ -75,17 +75,17 @@ class MahasiswaController {
         }
     }
 
-    public function edit($id) {
+    public function edit($nim) {
         $this->checkAuth();
-        $user = $this->user->find($id);
+        $user = $this->user->find($nim);
         if ($user) {
-            require_once 'views/users/edit.php';
+            require_once 'views/mahasiswas/edit.php';
         } else {
             echo "Pengguna tidak ditemukan.";
         }
     }
 
-    public function update($id) {
+    public function update($nim) {
         $this->checkAuth();
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['submit'])) {
             header('Location: /project');
@@ -94,55 +94,48 @@ class MahasiswaController {
 
         if (!$this->auth->validateCsrfToken($_POST['csrf_token'] ?? '')) {
             $errors[] = "CSRF token tidak valid.";
-            $user = $this->user->find($id);
-            require_once 'views/users/edit.php';
+            $user = $this->user->find($nim);
+            require_once 'views/mahasiswas/edit.php';
             return;
         }
 
         $data = [
-            'name' => htmlspecialchars($_POST['name'] ?? '', ENT_QUOTES, 'UTF-8'),
-            'email' => filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL),
-            'phone' => filter_var($_POST['phone'] ?? '', FILTER_SANITIZE_STRING),
-            'password' => $_POST['password'] ?? ''
+            'nama' => htmlspecialchars($_POST['nama'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'alamat' => htmlspecialchars($_POST['alamat'] ?? '', ENT_QUOTES, 'UTF-8'),
         ];
 
         $errors = [];
-        if (!is_string($data['name'])) {
+        // $mahasiswa = $this->user->find($data['nim']);
+        // if ($mahasiswa) {
+        //     $errors[] = "NIM sudah terdaftar.";
+        // }
+        if (!is_string($data['nama'])) {
             $errors[] = "Nama harus berupa teks.";
         }
-        if (empty($data['name']) || !preg_match('/^[a-zA-Z\s\']+$/', $data['name'])) {
+        if (empty($data['nama']) || !preg_match('/^[a-zA-Z\s\']+$/', $data['nama'])) {
             $errors[] = "Nama hanya boleh berisi huruf, spasi, atau apostrof.";
-        }
-        if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "Email tidak valid.";
-        }
-        if (!empty($data['phone']) && !preg_match('/^(08|\+62)\d{8,11}$/', $data['phone'])) {
-            $errors[] = "Nomor telepon tidak valid.";
-        }
-        if (!empty($data['password']) && strlen($data['password']) < 8) {
-            $errors[] = "Kata sandi baru minimal 8 karakter.";
         }
 
         if (!empty($errors)) {
             $old = $data;
-            $user = $this->user->find($id);
-            require_once 'views/users/edit.php';
+            $user = $this->user->find($nim);
+            require_once 'views/mahasiswas/edit.php';
             return;
         }
 
-        if ($this->user->update($id, $data)) {
+        if ($this->user->update($nim, $data)) {
             header('Location: /project');
         } else {
             $errors[] = "Gagal memperbarui data.";
             $old = $data;
-            $user = $this->user->find($id);
-            require_once 'views/users/edit.php';
+            $user = $this->user->find($nim);
+            require_once 'views/mahasiswas/edit.php';
         }
     }
 
-    public function delete($id) {
+    public function delete($nim) {
         $this->checkAuth();
-        if ($this->user->delete($id)) {
+        if ($this->user->delete($nim)) {
             header('Location: /project');
         } else {
             echo "Gagal menghapus data.";

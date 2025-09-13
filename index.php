@@ -41,13 +41,13 @@ switch ($action) {
         $mahasiswaController->store();
         break;
     case 'edit':
-        if ($id) $controller->edit($id);
+        if ($id) $mahasiswaController->edit($id);
         break;
     case 'update':
-        if ($id) $controller->update($id);
+        if ($id) $mahasiswaController->update($id);
         break;
     case 'delete':
-        if ($id) $controller->delete($id);
+        if ($id) $mahasiswaController->delete($id);
         break;
     case 'show':
         if ($id) $mahasiswaController->show($id);

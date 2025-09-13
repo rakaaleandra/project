@@ -30,7 +30,7 @@ class Mahasiswa {
         $statement = $this->pdo->prepare("UPDATE mahasiswa SET nama = ?, alamat = ? WHERE nim = ?");
         return $statement->execute([
             $data['nama'],
-            $data['nim'],
+            // $data['nim'],
             $data['alamat'],
             $nim
         ]);
