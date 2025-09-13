@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>CRUD Sederhana</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100 text-gray-800">
     <div class="container mx-auto px-4 py-8">
         <nav class="mb-6">
@@ -15,14 +17,20 @@
                 </ul>
                 <div class="w-full flex flex-row mt-4 text-center font-bold bg-white rounded-lg shadow">
                     <a href="/project" class="basis-full p-2 hover:rounded-l-lg hover:bg-sky-500 hover:shadow hover:text-white">mahasiswa</a>
-                    <div class="basis-full p-2 hover:bg-sky-500 hover:shadow hover:text-white">mata kuliah</div>
-                    <div class="basis-full p-2 hover:bg-sky-500 hover:shadow hover:text-white">dosen</div>
-                    <div class="basis-full p-2 hover:rounded-r-lg hover:bg-sky-500 hover:shadow hover:text-white">kuliah</div>
+                    <div class="basis-full p-2 hover:bg-sky-500 hover:shadow hover:text-white">
+                        <a href="/project/matakuliah" class="basis-full p-2 hover:rounded-l-lg hover:bg-sky-500 hover:shadow hover:text-white">mata kuliah</a>
+                    </div>
+                    <div class="basis-full p-2 hover:bg-sky-500 hover:shadow hover:text-white">
+                        <a href="/project/dosen" class="basis-full p-2 hover:rounded-l-lg hover:bg-sky-500 hover:shadow hover:text-white">dosen</a>
+                    </div>
+                    <div class="basis-full p-2 hover:rounded-r-lg hover:bg-sky-500 hover:shadow hover:text-white">
+                        <a href="/project/kuliah" class="basis-full p-2 hover:rounded-l-lg hover:bg-sky-500 hover:shadow hover:text-white">kuliah</a>
+                    </div>
                 </div>
             <?php else: ?>
                 <ul class="flex space-x-4">
                     <li><a href="/project/login" class="text-blue-500 hover:underline">Login</a></li>
                     <li><a href="/project/register" class="text-blue-500 hover:underline">Register</a></li>
                 </ul>
-                <?php endif; ?>
+            <?php endif; ?>
         </nav>
