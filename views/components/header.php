@@ -15,8 +15,8 @@
                 </ul>
                 <div class="w-full flex flex-row mt-4 text-center font-bold bg-white rounded-lg shadow">
                     <a href="/project" class="basis-full p-2 hover:rounded-l-lg hover:bg-sky-500 hover:shadow hover:text-white">mahasiswa</a>
-                    <div class="basis-full p-2 hover:bg-sky-500 hover:shadow hover:text-white">mata kuliah</div>
-                    <div class="basis-full p-2 hover:bg-sky-500 hover:shadow hover:text-white">dosen</div>
+                    <a href="/project/matakuliah/index" class="basis-full p-2 hover:bg-sky-500 hover:shadow hover:text-white">mata kuliah</a>
+                    <a href="/project/dosen/index" class="basis-full p-2 hover:bg-sky-500 hover:shadow hover:text-white">dosen</a>
                     <div class="basis-full p-2 hover:rounded-r-lg hover:bg-sky-500 hover:shadow hover:text-white">kuliah</div>
                 </div>
             <?php else: ?>

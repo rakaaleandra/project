@@ -14,7 +14,7 @@ class AuthController {
         $this->user = new User($pdo);
     }
 
-    public function login($pdo) {
+    public function login() {
         if ($this->auth->check()) {
             header('Location: /project');
             exit;
