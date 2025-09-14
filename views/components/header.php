@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>CRUD Sederhana</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100 text-gray-800">
     <div class="container mx-auto px-4 py-8">
         <nav class="mb-6">
@@ -24,5 +26,5 @@
                     <li><a href="/project/login" class="text-blue-500 hover:underline">Login</a></li>
                     <li><a href="/project/register" class="text-blue-500 hover:underline">Register</a></li>
                 </ul>
-                <?php endif; ?>
+            <?php endif; ?>
         </nav>

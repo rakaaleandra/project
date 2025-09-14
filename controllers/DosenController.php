@@ -105,6 +105,7 @@ class DosenController {
         ];
 
         $errors = [];
+
         if (!is_string($data['nama'])) {
             $errors[] = "Nama harus berupa teks.";
         }
