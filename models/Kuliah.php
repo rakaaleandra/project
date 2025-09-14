@@ -7,7 +7,13 @@ class Kuliah {
     }
 
     public function all() {
-        $statement = $this->pdo->query("SELECT * FROM kuliah");
+        $statement = $this->pdo->query("
+            SELECT mahasiswa.nama, mata_kuliah.nama_matkul, dosen.nama, nilai
+            FROM kuliah
+            INNER JOIN mahasiswa ON mahasiswa.nim = kuliah.fk_nim
+            INNER JOIN mata_kuliah ON mata_kuliah.kode_matkul = kuliah.fk_kode_matkul
+            INNER JOIN dosen ON dosen.nip = kuliah.fk_nip;
+        ");
         return $statement->fetchAll();
     }
 

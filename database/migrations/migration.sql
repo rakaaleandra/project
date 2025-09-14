@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS perkuliahan;
 USE perkuliahan;
 
 CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     phone VARCHAR(15),
@@ -34,7 +34,7 @@ CREATE TABLE dosen (
 );
 
 CREATE TABLE kuliah (
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	fk_nim VARCHAR(20),
 	fk_kode_matkul VARCHAR(20),
 	fk_nip VARCHAR(20),

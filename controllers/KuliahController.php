@@ -32,7 +32,7 @@ class KuliahController {
     public function store() {
         $this->checkAuth();
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['submit'])) {
-            header('Location: /project/matakuliah/index');
+            header('Location: /project/kuliah/index');
             exit;
         }
 
@@ -43,17 +43,13 @@ class KuliahController {
         }
 
         $data = [
-            'kode_matkul' => htmlspecialchars($_POST['kode_matkul'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'fk' => htmlspecialchars($_POST['kode_matkul'] ?? '', ENT_QUOTES, 'UTF-8'),
             'nama_matkul' => htmlspecialchars($_POST['nama_matkul'] ?? '', ENT_QUOTES, 'UTF-8'),
             'sks' => (int) ($_POST['sks'] ?? 0),
             'semester'=> (int) ($_POST['semester'] ?? 0),
         ];
 
         $errors = [];
-        $matakuliah = $this->user->find($data['kode_matkul']);
-        if ($matakuliah) {
-            $errors[] = "kode mata kuliah sudah terdaftar.";
-        }
         if (!is_string($data['nama_matkul'])) {
             $errors[] = "nama_matkul harus berupa teks.";
         }

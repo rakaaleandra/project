@@ -13,6 +13,7 @@ $authController = new AuthController($pdo);
 $mahasiswaController = new MahasiswaController($pdo);
 $dosenController = new DosenController($pdo);
 $mataKuliahController = new MataKuliahController($pdo);
+$kuliahController = new KuliahController($pdo);
 
 $url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
 $url = explode('/', $url);
@@ -101,6 +102,39 @@ switch ($action) {
         }
         // Default to index if no valid action is found
         $mataKuliahController->index();
+        break;
+
+    case 'kuliah':
+        if(isset($url[1]) && $url[1] === 'index') {
+            $kuliahController->index();
+            break;
+        }
+        if(isset($url[1]) && $url[1] === 'create') {
+            $kuliahController->create();
+            break;
+        }
+        if(isset($url[1]) && $url[1] === 'store') {
+            $kuliahController->store();
+            break;
+        }
+        if(isset($url[1]) && $url[1] === 'edit' && isset($url[2])) {
+            $kuliahController->edit($url[2]);
+            break;
+        }
+        if(isset($url[1]) && $url[1] === 'update' && isset($url[2])) {
+            $kuliahController->update($url[2]);
+            break;
+        }
+        if(isset($url[1]) && $url[1] === 'delete' && isset($url[2])) {
+            $kuliahController->delete($url[2]);
+            break;
+        }
+        if(isset($url[1]) && $url[1] === 'show' && isset($url[2])) {
+            $kuliahController->show($url[2]);
+            break;
+        }
+        // Default to index if no valid action is found
+        $kuliahController->index();
         break;
     
     case 'create':
