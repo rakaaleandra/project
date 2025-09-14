@@ -21,23 +21,23 @@ $auth = new Auth($pdo);
         <form action="/project/doRegister" method="POST" class="space-y-4 max-w-md">
             <input type="hidden" name="csrf_token" value="<?= $auth->generateCsrfToken(); ?>">
             <div>
-                <label class="block mb-1">Nama:</label>
+                <label class="block mb-1 font-medium">Nama:</label>
                 <input type="text" name="name" value="<?= htmlspecialchars($old['name'] ?? ''); ?>" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
-                <label class="block mb-1">Email:</label>
+                <label class="block mb-1 font-medium">Email:</label>
                 <input type="email" name="email" value="<?= htmlspecialchars($old['email'] ?? ''); ?>" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
-                <label class="block mb-1">Nomor Telepon:</label>
+                <label class="block mb-1 font-medium">Nomor Telepon:</label>
                 <input type="text" name="phone" value="<?= htmlspecialchars($old['phone'] ?? ''); ?>" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Contoh: 081234567890">
             </div>
             <div>
-                <label class="block mb-1">Kata Sandi:</label>
+                <label class="block mb-1 font-medium">Kata Sandi:</label>
                 <input type="password" name="password" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div class="flex justify-center">
-                <button type="submit" name="submit" class="flex justify-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daftar</button>
+                <button type="submit" name="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daftar</button>
             </div>
         </form>
     </div>
