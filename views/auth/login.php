@@ -21,11 +21,11 @@ $auth = new Auth($pdo);
         <form action="/project/doLogin" method="POST" class="space-y-4 w-full">
             <input type="hidden" name="csrf_token" value="<?= $auth->generateCsrfToken(); ?>">
             <div>
-                <label class="block mb-1">Email:</label>
+                <label class="block mb-1 font-medium">Email:</label>
                 <input type="email" name="email" value="<?= htmlspecialchars($old['email'] ?? ''); ?>" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
-                <label class="block mb-1">Kata Sandi:</label>
+                <label class="block mb-1 font-medium">Kata Sandi:</label>
                 <input type="password" name="password" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
