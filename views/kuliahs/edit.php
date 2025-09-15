@@ -16,7 +16,7 @@ $auth = new Auth($pdo);
     </div>
 <?php endif; ?>
 
-<form action="/project/matakuliah/update/<?= $user['kode_matkul']; ?>" method="POST" class="space-y-4 max-w-md">
+<form action="/project/kuliah/update/<?= $user['kode_matkul']; ?>" method="POST" class="space-y-4 max-w-md">
     <input type="hidden" name="csrf_token" value="<?= $auth->generateCsrfToken(); ?>">
     <div>
         <label class="block mb-1">Nama Mata Kuliah:</label>

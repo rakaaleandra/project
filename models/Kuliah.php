@@ -8,7 +8,12 @@ class Kuliah {
 
     public function all() {
         $statement = $this->pdo->query("
-            SELECT mahasiswa.nama, mata_kuliah.nama_matkul, dosen.nama, nilai
+            SELECT
+                kuliah.id AS id,
+                mahasiswa.nama AS nama_mahasiswa, 
+                mata_kuliah.nama_matkul AS nama_mata_kuliah, 
+                dosen.nama AS nama_dosen, 
+                nilai
             FROM kuliah
             INNER JOIN mahasiswa ON mahasiswa.nim = kuliah.fk_nim
             INNER JOIN mata_kuliah ON mata_kuliah.kode_matkul = kuliah.fk_kode_matkul

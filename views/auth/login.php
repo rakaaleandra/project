@@ -4,7 +4,7 @@ require_once 'models/Auth.php';
 $auth = new Auth($pdo);
 ?>
 
-<div class="min-h-screen flex items-center justify-center bg-gray-100">
+<div class="h-screen flex items-center justify-center bg-gray-100">
     <div class="max-w-md w-full bg-white p-8 rounded shadow">
         <h2 class="text-2xl text-center font-bold mb-6">Login</h2>
 
@@ -28,10 +28,14 @@ $auth = new Auth($pdo);
                 <label class="block mb-1 font-medium">Kata Sandi:</label>
                 <input type="password" name="password" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
-            <div>
+            <!-- <div>
                 <label class="flex items-center">
                     <input type="checkbox" name="remember" class="mr-2"> Ingat Saya
                 </label>
+            </div> -->
+            <div>
+                <p class="inline">Belum punya akun?</p>
+                <a href="/project/register" class="text-blue-500 hover:underline">Daftar di sini</a>
             </div>
             <div class="flex justify-center">
                 <button type="submit" name="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Login</button>

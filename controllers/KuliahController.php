@@ -1,14 +1,24 @@
 <?php
 require_once __DIR__ . '/../models/Auth.php';
 require_once __DIR__ . '/../models/Kuliah.php';
+require_once __DIR__ . '/../models/Mahasiswa.php';
+require_once __DIR__ . '/../models/MataKuliah.php';
+require_once __DIR__ . '/../models/Dosen.php';
 
 class KuliahController {
     private $user;
     private $auth;
 
+    private $mahasiswa;
+    private $mataKuliah;
+    private $dosen;
+
     public function __construct($pdo) {
         $this->user = new Kuliah($pdo);
         $this->auth = new Auth($pdo);
+        $this->mahasiswa = new Mahasiswa($pdo);
+        $this->mataKuliah = new MataKuliah($pdo);
+        $this->dosen = new Dosen($pdo);
     }
 
     private function checkAuth() {
@@ -43,19 +53,31 @@ class KuliahController {
         }
 
         $data = [
-            'fk' => htmlspecialchars($_POST['kode_matkul'] ?? '', ENT_QUOTES, 'UTF-8'),
-            'nama_matkul' => htmlspecialchars($_POST['nama_matkul'] ?? '', ENT_QUOTES, 'UTF-8'),
-            'sks' => (int) ($_POST['sks'] ?? 0),
-            'semester'=> (int) ($_POST['semester'] ?? 0),
+            'fk_nim' => htmlspecialchars($_POST['fk_nim'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'fk_kode_matkul' => htmlspecialchars($_POST['fk_kode_matkul'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'fk_nip' => htmlspecialchars($_POST['fk_nip'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'nilai'=> (int) ($_POST['nilai'] ?? 0),
         ];
 
         $errors = [];
-        if (!is_string($data['nama_matkul'])) {
-            $errors[] = "nama_matkul harus berupa teks.";
+        $nim = $this->mahasiswa->find($data['fk_nim']);
+        $nip = $this->dosen->find($data['fk_nip']);
+        $kode_matkul = $this->mataKuliah->find($data['fk_kode_matkul']);
+        if (!$kode_matkul) {
+            $errors[] = "Kode Mata Kuliah belum terdaftar.";
         }
-        if (empty($data['nama_matkul']) || !preg_match('/^[a-zA-Z\s\']+$/', $data['nama_matkul'])) {
-            $errors[] = "nama_matkul hanya boleh berisi huruf, spasi, atau apostrof.";
+        if (!$nip) {
+            $errors[] = "NIP belum terdaftar.";
         }
+        if (!$nim) {
+            $errors[] = "NIM belum terdaftar.";
+        }
+        // if (!is_string($data['nama_matkul'])) {
+        //     $errors[] = "nama_matkul harus berupa teks.";
+        // }
+        // if (empty($data['nama_matkul']) || !preg_match('/^[a-zA-Z\s\']+$/', $data['nama_matkul'])) {
+        //     $errors[] = "nama_matkul hanya boleh berisi huruf, spasi, atau apostrof.";
+        // }
 
         if (!empty($errors)) {
             $old = $data;
@@ -64,7 +86,7 @@ class KuliahController {
         }
 
         if ($this->user->create($data)) {
-            header('Location: /project/matakuliah/index');
+            header('Location: /project/kuliahs/index');
         } else {
             $errors[] = "Gagal menyimpan data.";
             $old = $data;

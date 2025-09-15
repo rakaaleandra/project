@@ -17,9 +17,9 @@
         <?php foreach ($users as $user): ?>
             <tr>
                 <td class="border px-4 py-2"><?= $user['id']; ?></td>
-                <td class="border px-4 py-2"><?= htmlspecialchars($user['mahasiswa.nama']); ?></td>
-                <td class="border px-4 py-2"><?= htmlspecialchars($user['mata_kuliah.nama_matkul']); ?></td>
-                <td class="border px-4 py-2"><?= htmlspecialchars($user['dosen.nama']); ?></td>
+                <td class="border px-4 py-2"><?= htmlspecialchars($user['nama_mahasiswa']); ?></td>
+                <td class="border px-4 py-2"><?= htmlspecialchars($user['nama_mata_kuliah']); ?></td>
+                <td class="border px-4 py-2"><?= htmlspecialchars($user['nama_dosen']); ?></td>
                 <td class="border px-4 py-2"><?= htmlspecialchars($user['nilai']); ?></td>
                 <td class="border px-4 py-2 space-x-2">
                     <a href="show/<?= $user['id']; ?>" class="text-blue-500 hover:underline">Lihat</a>
