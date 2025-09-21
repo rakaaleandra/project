@@ -26,6 +26,7 @@ class MahasiswaController {
 
     public function create() {
         $this->checkAuth();
+        global $pdo;
         require_once 'views/mahasiswas/create.php';
     }
 
@@ -76,6 +77,7 @@ class MahasiswaController {
     }
 
     public function edit($nim) {
+        global $pdo;
         $this->checkAuth();
         $user = $this->user->find($nim);
         if ($user) {
@@ -105,10 +107,6 @@ class MahasiswaController {
         ];
 
         $errors = [];
-        // $mahasiswa = $this->user->find($data['nim']);
-        // if ($mahasiswa) {
-        //     $errors[] = "NIM sudah terdaftar.";
-        // }
         if (!is_string($data['nama'])) {
             $errors[] = "Nama harus berupa teks.";
         }

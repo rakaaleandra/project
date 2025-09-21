@@ -26,7 +26,7 @@ $auth = new Auth($pdo);
         <label class="block mb-1">Email:</label>
         <input type="email" name="email" value="<?= htmlspecialchars($old['email'] ?? ''); ?>" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
-    <div trent">
+    <div trent>
         <label class="block mb-1">Nomor Telepon:</label>
         <input type="text" name="phone" value="<?= htmlspecialchars($old['phone'] ?? ''); ?>" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Contoh: 081234567890">
     </div>

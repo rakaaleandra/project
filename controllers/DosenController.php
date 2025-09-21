@@ -31,14 +31,15 @@ class DosenController
     public function create()
     {
         $this->checkAuth();
-        require_once 'views/dosen/create.php';
+        global $pdo; 
+        require_once 'views/dosens/create.php';
     }
 
     public function store()
     {
         $this->checkAuth();
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['submit'])) {
-            header('Location: /project');
+            header('Location: /project/dosen/index');
             exit;
         }
 
@@ -81,10 +82,10 @@ class DosenController
         }
     }
 
-    public function edit($id)
-    {
+    public function edit($nip) {
+        global $pdo;
         $this->checkAuth();
-        $user = $this->user->find($id);
+        $user = $this->user->find($nip);
         if ($user) {
             require_once 'views/users/edit.php';
         } else {
@@ -92,17 +93,16 @@ class DosenController
         }
     }
 
-    public function update($id)
-    {
+    public function update($nip) {
         $this->checkAuth();
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['submit'])) {
-            header('Location: /project');
+            header('Location: /project/dosen/index');
             exit;
         }
 
         if (!$this->auth->validateCsrfToken($_POST['csrf_token'] ?? '')) {
             $errors[] = "CSRF token tidak valid.";
-            $user = $this->user->find($id);
+            $user = $this->user->find($nip);
             require_once 'views/users/edit.php';
             return;
         }
@@ -133,13 +133,13 @@ class DosenController
 
         if (!empty($errors)) {
             $old = $data;
-            $user = $this->user->find($id);
-            require_once 'views/users/edit.php';
+            $user = $this->user->find($nip);
+            require_once 'views/dosens/edit.php';
             return;
         }
 
-        if ($this->user->update($id, $data)) {
-            header('Location: /project');
+        if ($this->user->update($nip, $data)) {
+            header('Location: /project/dosen/index');
         } else {
             $errors[] = "Gagal memperbarui data.";
             $old = $data;
@@ -148,11 +148,10 @@ class DosenController
         }
     }
 
-    public function delete($id)
-    {
+    public function delete($nip) {
         $this->checkAuth();
-        if ($this->user->delete($id)) {
-            header('Location: /project');
+        if ($this->user->delete($nip)) {
+            header('Location: /project/dosen/index');
         } else {
             echo "Gagal menghapus data.";
         }

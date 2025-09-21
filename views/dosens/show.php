@@ -4,7 +4,7 @@
     <div class="max-w-md w-full bg-gradient-to-r from-blue-50 to-blue-100 p-1 rounded-2xl shadow-lg">
         <div class="bg-white p-8 rounded-xl shadow-md">
             <h2 class="text-3xl font-extrabold text-blue-600 mb-6 text-center flex items-center justify-center gap-2">
-                <i data-lucide="graduation-cap" class="w-7 h-7"></i> Detail Mahasiswa
+                Detail Dosen
             </h2>
 
             <div class="space-y-4 text-gray-700">

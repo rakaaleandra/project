@@ -32,4 +32,3 @@ try {
     die("Koneksi gagal: " . $e->getMessage());
 }
 // echo "Connected successfully";
-

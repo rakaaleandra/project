@@ -14,7 +14,8 @@ class AuthController {
         $this->user = new User($pdo);
     }
 
-    public function login($pdo) {
+    public function login() {
+        global $pdo;
         if ($this->auth->check()) {
             header('Location: /project');
             exit;
@@ -23,6 +24,7 @@ class AuthController {
     }
 
     public function doLogin() {
+        global $pdo;
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['submit'])) {
             header('Location: /project/login');
             exit;
@@ -60,6 +62,7 @@ class AuthController {
     }
 
     public function register() {
+        global $pdo;
         if ($this->auth->check()) {
             header('Location: /project');
             exit;
@@ -68,6 +71,7 @@ class AuthController {
     }
 
     public function doRegister() {
+        global $pdo;    
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['submit'])) {
             header('Location: /project/register');
             exit;
