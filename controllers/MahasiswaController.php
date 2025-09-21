@@ -32,7 +32,7 @@ class MahasiswaController {
     public function store() {
         $this->checkAuth();
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['submit'])) {
-            header('Location: /project');
+            header('Location: /project/index');
             exit;
         }
 
@@ -67,7 +67,7 @@ class MahasiswaController {
         }
 
         if ($this->user->create($data)) {
-            header('Location: /project');
+            header('Location: /project/index');
         } else {
             $errors[] = "Gagal menyimpan data.";
             $old = $data;
@@ -88,7 +88,7 @@ class MahasiswaController {
     public function update($nim) {
         $this->checkAuth();
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['submit'])) {
-            header('Location: /project');
+            header('Location: /project/index');
             exit;
         }
 
@@ -124,7 +124,7 @@ class MahasiswaController {
         }
 
         if ($this->user->update($nim, $data)) {
-            header('Location: /project');
+            header('Location: /project/index');
         } else {
             $errors[] = "Gagal memperbarui data.";
             $old = $data;
@@ -136,7 +136,7 @@ class MahasiswaController {
     public function delete($nim) {
         $this->checkAuth();
         if ($this->user->delete($nim)) {
-            header('Location: /project');
+            header('Location: /project/index');
         } else {
             echo "Gagal menghapus data.";
         }
