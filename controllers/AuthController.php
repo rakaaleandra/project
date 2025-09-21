@@ -16,7 +16,7 @@ class AuthController {
 
     public function login() {
         if ($this->auth->check()) {
-            header('Location: /project');
+            header('Location: /project/index');
             exit;
         }
         require_once 'views/auth/login.php';
@@ -52,7 +52,7 @@ class AuthController {
                 $this->user->updateToken($_SESSION['user_id'], $token);
                 setcookie('remember_me', $token, time() + (30 * 24 * 3600), '/', '', false, true);
             }
-            header('Location: /project');
+            header('Location: /project/index');
         } else {
             $errors[] = "Email atau kata sandi salah.";
             require_once 'views/auth/login.php';
@@ -61,7 +61,7 @@ class AuthController {
 
     public function register() {
         if ($this->auth->check()) {
-            header('Location: /project');
+            header('Location: /project/index');
             exit;
         }
         require_once 'views/auth/register.php';
@@ -102,7 +102,7 @@ class AuthController {
 
         if (empty($errors) && $this->user->create($data)) {
             $this->auth->login($data['email'], $data['password']);
-            header('Location: /project');
+            header('Location: /project/index');
         } else {
             $old = $data;
             $errors[] = $errors ? $errors[0] : "Gagal mendaftar.";

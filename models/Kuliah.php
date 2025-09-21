@@ -53,4 +53,24 @@ class Kuliah {
         $statement = $this->pdo->prepare("DELETE FROM kuliah WHERE id = ?");
         return $statement->execute([$id]);
     }
+
+    public function viewAll($id){
+        $statement = $this->pdo->prepare("
+            SELECT
+                fk_nim, 
+                fk_kode_matkul, 
+                fk_nip,
+                mahasiswa.nama AS nama_mahasiswa, 
+                mata_kuliah.nama_matkul AS nama_mata_kuliah, 
+                dosen.nama AS nama_dosen, 
+                nilai
+            FROM kuliah
+            INNER JOIN mahasiswa ON mahasiswa.nim = kuliah.fk_nim
+            INNER JOIN mata_kuliah ON mata_kuliah.kode_matkul = kuliah.fk_kode_matkul
+            INNER JOIN dosen ON dosen.nip = kuliah.fk_nip
+            WHERE kuliah.id = ?
+        ");
+        $statement->execute([$id]);
+        return $statement->fetch();
+    }
 }

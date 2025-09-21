@@ -167,7 +167,7 @@ class KuliahController {
 
     public function show($id) {
         $this->checkAuth();
-        $user = $this->user->find($id);
+        $user = $this->user->viewAll($id);
         if ($user) {
             require_once 'views/kuliahs/show.php';
         } else {
