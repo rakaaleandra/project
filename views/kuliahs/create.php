@@ -19,7 +19,7 @@ $auth = new Auth($pdo);
 <form action="/project/kuliah/store" method="POST" class="space-y-4 max-w-md">
     <input type="hidden" name="csrf_token" value="<?= $auth->generateCsrfToken(); ?>">
     <div>
-        <label class="block mb-1">NIM:</label>
+        <label class="block mb-1">NIM Mahasiswa:</label>
         <input type="text" name="fk_nim" value="<?= htmlspecialchars($old['fk_nim'] ?? ''); ?>" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
     <div>
@@ -27,7 +27,7 @@ $auth = new Auth($pdo);
         <input type="text" name="fk_kode_matkul" value="<?= htmlspecialchars($old['fk_kode_matkul'] ?? ''); ?>" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
     <div>
-        <label class="block mb-1">NIP:</label>
+        <label class="block mb-1">NIP Dosen:</label>
         <input type="text" name="fk_nip" value="<?= htmlspecialchars($old['fk_nip'] ?? ''); ?>" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
     <div>

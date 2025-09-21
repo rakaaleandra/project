@@ -1,25 +1,24 @@
 <?php
+require __DIR__ . '/../vendor/autoload.php';
 
-$params = [
-    'host'     => '192.168.1.13',  // alamat server database
-    'port'     => 5432,         // port PostgreSQL default
-    'database' => 'perkuliahan',// nama database
-    'user'     => 'tester',     // username PostgreSQL
-    'password' => 'secret'      // password PostgreSQL
-];
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+$host = $_ENV['DB_HOST'];
+$dbname = $_ENV['DB_NAME'];
+$user = $_ENV['DB_USER'];
+$pass = $_ENV['DB_PASSWORD'];
+$port = $_ENV['DB_PORT'];
+$db = $_ENV['DB'];
 
 try {
-    $dsn = sprintf("pgsql:host=%s;port=%d;dbname=%s",
-        $params['host'],
-        $params['port'],
-        $params['database']
-    );
-
-    // $pdo = new PDO($dsn, $params['user'], $params['password']);
-    $pdo = new PDO('pgsql:host=localhost;port=5432;dbname=perkuliahan;user=tester;password=secret');
+    $dsn = "$db:host=$host;port=$port;dbname=$dbname";
+    $pdo = new PDO($dsn, $user, $pass);
+    // $pdo = new PDO('pgsql:host=$host;port=5432;dbname=perkuliahan;user=tester;password=secret');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Koneksi gagal: " . $e->getMessage());
 }
-// echo "Connected successfully";
 
+
+// echo "Connected successfully";

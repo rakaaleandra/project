@@ -86,7 +86,7 @@ class KuliahController {
         }
 
         if ($this->user->create($data)) {
-            header('Location: /project/kuliahs/index');
+            header('Location: /project/kuliah/index');
         } else {
             $errors[] = "Gagal menyimpan data.";
             $old = $data;
@@ -94,9 +94,9 @@ class KuliahController {
         }
     }
 
-    public function edit($kode_matkul) {
+    public function edit($id) {
         $this->checkAuth();
-        $user = $this->user->find($kode_matkul);
+        $user = $this->user->find($id);
         if ($user) {
             require_once 'views/kuliahs/edit.php';
         } else {
@@ -104,63 +104,70 @@ class KuliahController {
         }
     }
 
-    public function update($kode_matkul) {
+    public function update($id) {
         $this->checkAuth();
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['submit'])) {
-            header('Location: /project/matakuliah/index');
+            header('Location: /project/kuliah/index');
             exit;
         }
 
         if (!$this->auth->validateCsrfToken($_POST['csrf_token'] ?? '')) {
             $errors[] = "CSRF token tidak valid.";
-            $user = $this->user->find($kode_matkul);
+            $user = $this->user->find($id);
             require_once 'views/kuliahs/edit.php';
             return;
         }
 
         $data = [
-            'nama_matkul' => htmlspecialchars($_POST['nama_matkul'] ?? '', ENT_QUOTES, 'UTF-8'),
-            'sks' => htmlspecialchars($_POST['sks'] ?? '', ENT_QUOTES, 'UTF-8'),
-            'semester' => htmlspecialchars($_POST['semester'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'fk_nim' => htmlspecialchars($_POST['fk_nim'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'fk_kode_matkul' => htmlspecialchars($_POST['fk_kode_matkul'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'fk_nip' => htmlspecialchars($_POST['fk_nip'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'nilai'=> (int) ($_POST['nilai'] ?? 0),
         ];
 
         $errors = [];
-        if (!is_string($data['nama_matkul'])) {
-            $errors[] = "nama_matkul harus berupa teks.";
+        $nim = $this->mahasiswa->find($data['fk_nim']);
+        $nip = $this->dosen->find($data['fk_nip']);
+        $kode_matkul = $this->mataKuliah->find($data['fk_kode_matkul']);
+        if (!$kode_matkul) {
+            $errors[] = "Kode Mata Kuliah belum terdaftar.";
         }
-        if (empty($data['nama_matkul']) || !preg_match('/^[a-zA-Z\s\']+$/', $data['nama_matkul'])) {
-            $errors[] = "nama_matkul hanya boleh berisi huruf, spasi, atau apostrof.";
+        if (!$nip) {
+            $errors[] = "NIP belum terdaftar.";
+        }
+        if (!$nim) {
+            $errors[] = "NIM belum terdaftar.";
         }
 
         if (!empty($errors)) {
             $old = $data;
-            $user = $this->user->find($kode_matkul);
+            $user = $this->user->find($id);
             require_once 'views/kuliahs/edit.php';
             return;
         }
 
-        if ($this->user->update($kode_matkul, $data)) {
-            header('Location: /project/matakuliah/index');
+        if ($this->user->update($id, $data)) {
+            header('Location: /project/kuliah/index');
         } else {
             $errors[] = "Gagal memperbarui data.";
             $old = $data;
-            $user = $this->user->find($kode_matkul);
+            $user = $this->user->find($id);
             require_once 'views/kuliahs/edit.php';
         }
     }
 
-    public function delete($kode_matkul) {
+    public function delete($id) {
         $this->checkAuth();
-        if ($this->user->delete($kode_matkul)) {
-            header('Location: /project/matakuliah/index');
+        if ($this->user->delete($id)) {
+            header('Location: /project/kuliah/index');
         } else {
             echo "Gagal menghapus data.";
         }
     }
 
-    public function show($kode_matkul) {
+    public function show($id) {
         $this->checkAuth();
-        $user = $this->user->find($kode_matkul);
+        $user = $this->user->find($id);
         if ($user) {
             require_once 'views/kuliahs/show.php';
         } else {
