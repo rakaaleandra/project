@@ -9,8 +9,8 @@
 </head>
 
 <body class="bg-gray-100 text-gray-800">
+    <?php if (isset($_SESSION['user_id'])): ?>
     <div class="container mx-auto px-4 py-8">
-        <?php if (isset($_SESSION['user_id'])): ?>
             <nav class="bg-white shadow rounded-lg mb-6">
                 <div class="flex justify-between items-center px-6 py-3">
                     <div class="flex space-x-6 font-medium">
@@ -41,4 +41,5 @@
                     </a>
                 </div>
             </nav>
-        <?php endif; ?>
+        <?php else: ?>
+    <?php endif; ?>

@@ -72,12 +72,6 @@ class KuliahController {
         if (!$nim) {
             $errors[] = "NIM belum terdaftar.";
         }
-        // if (!is_string($data['nama_matkul'])) {
-        //     $errors[] = "nama_matkul harus berupa teks.";
-        // }
-        // if (empty($data['nama_matkul']) || !preg_match('/^[a-zA-Z\s\']+$/', $data['nama_matkul'])) {
-        //     $errors[] = "nama_matkul hanya boleh berisi huruf, spasi, atau apostrof.";
-        // }
 
         if (!empty($errors)) {
             $old = $data;
