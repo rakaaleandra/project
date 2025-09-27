@@ -14,14 +14,13 @@
             <nav class="bg-white shadow rounded-lg mb-6">
                 <div class="flex justify-between items-center px-6 py-3">
                     <div class="flex space-x-6 font-medium">
-                        <a href="/sister"
+                        <!-- <a href="/project"
                             class="flex items-center gap-2 px-2 py-1 rounded-md transition 
-                            <?php echo ($_SERVER['REQUEST_URI'] == '/sister') ? 'text-blue-600 font-semibold bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'; ?>">
+                            <?php echo ($_SERVER['REQUEST_URI'] == '/project') ? 'text-blue-600 font-semibold bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'; ?>">
                             <i data-lucide="home"></i> Home
-                        </a>
-                        <a href="/project/mahasiswa/index"
-                            class="flex items-center gap-2 px-2 py-1 rounded-md transition 
-                            <?php echo (strpos($_SERVER['REQUEST_URI'], '/project/mahasiswa') === 0) ? 'text-blue-600 font-semibold bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'; ?>">
+                        </a> -->
+                        <a href="/project"
+                            class="flex items-center gap-2 px-2 py-1 rounded-md transition <?php echo (strpos($_SERVER['REQUEST_URI'], '/project') === 0 && !preg_match('#^/project/(matakuliah|dosen|kuliah)#', $_SERVER['REQUEST_URI'])) ? 'text-blue-600 font-semibold bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'; ?>">
                             <i data-lucide="users"></i> Mahasiswa
                         </a>
                         <a href="/project/matakuliah/index"

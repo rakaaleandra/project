@@ -7,8 +7,46 @@ class Kuliah {
     }
 
     public function all() {
-        $statement = $this->pdo->query("SELECT * FROM kuliah");
+        $sql = "SELECT 
+                k.id,
+                k.nilai,
+                m.nim,
+                m.nama AS nama_mahasiswa,
+                mk.kode_matkul,
+                mk.nama_matkul AS nama_mata_kuliah,
+                mk.sks,
+                mk.semester,
+                d.nip,
+                d.nama AS nama_dosen
+            FROM kuliah k
+            JOIN mahasiswa m ON k.fk_nim = m.nim
+            JOIN mata_kuliah mk ON k.fk_kode_matkul = mk.kode_matkul
+            JOIN dosen d ON k.fk_nip = d.nip";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute();
         return $statement->fetchAll();
+    }
+
+    public function viewAll($id) {
+        $sql = "SELECT 
+                k.id,
+                k.nilai,
+                m.nim,
+                m.nama AS nama_mahasiswa,
+                mk.kode_matkul,
+                mk.nama_matkul,
+                mk.sks,
+                mk.semester,
+                d.nip,
+                d.nama AS nama_dosen
+            FROM kuliah k
+            JOIN mahasiswa m ON k.fk_nim = m.nim
+            JOIN mata_kuliah mk ON k.fk_kode_matkul = mk.kode_matkul
+            JOIN dosen d ON k.fk_nip = d.nip
+            WHERE k.id = ?";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([$id]);
+        return $statement->fetch();
     }
 
     public function find($id) {

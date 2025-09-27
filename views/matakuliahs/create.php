@@ -31,7 +31,6 @@ $auth = new Auth($pdo);
                         required
                         class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
                 </div>
-
                 <div>
                     <label class="block mb-2 font-medium text-gray-700 flex items-center gap-2">
                         <i data-lucide="book-text" class="w-4 h-4 text-blue-500"></i> Nama Mata Kuliah
@@ -41,7 +40,6 @@ $auth = new Auth($pdo);
                         required
                         class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
                 </div>
-
                 <div>
                     <label class="block mb-2 font-medium text-gray-700 flex items-center gap-2">
                         <i data-lucide="layers" class="w-4 h-4 text-blue-500"></i> SKS
@@ -51,7 +49,6 @@ $auth = new Auth($pdo);
                         required
                         class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
                 </div>
-
                 <div>
                     <label class="block mb-2 font-medium text-gray-700 flex items-center gap-2">
                         <i data-lucide="calendar" class="w-4 h-4 text-blue-500"></i> Semester
@@ -61,7 +58,6 @@ $auth = new Auth($pdo);
                         required
                         class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
                 </div>
-
                 <div class="flex justify-center">
                     <button type="submit" name="submit"
                         class="inline-flex items-center gap-2 bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-600 hover:shadow-md transition">

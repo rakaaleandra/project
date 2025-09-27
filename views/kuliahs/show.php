@@ -7,26 +7,39 @@
                 <i data-lucide="award" class="w-6 h-6"></i> Kartu Hasil Studi
             </h2>
 
-            <div class="space-y-3 text-gray-700">
-                <p class="flex items-center gap-2">
+            <div class="space-y-4 text-gray-700">
+                <div class="flex items-center gap-3 p-4 bg-gray-50 rounded-lg shadow-sm">
                     <i data-lucide="book-open" class="text-blue-500 w-5 h-5"></i>
-                    <span><strong>Mata Kuliah:</strong> <?= htmlspecialchars($user['nama_matkul']); ?></span>
-                </p>
-                <p class="flex items-center gap-2">
-                    <i data-lucide="layers" class="text-blue-500 w-5 h-5"></i>
-                    <span><strong>SKS:</strong> <?= htmlspecialchars($user['sks']); ?></span>
-                </p>
-                <p class="flex items-center gap-2">
-                    <i data-lucide="calendar" class="text-blue-500 w-5 h-5"></i>
-                    <span><strong>Semester:</strong> <?= htmlspecialchars($user['semester']); ?></span>
-                </p>
-            </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Mata Kuliah</p>
+                        <p class="text-lg font-semibold"><?= htmlspecialchars($user['nama_matkul']); ?></p>
+                    </div>
+                </div>
+                <div class="space-y-4 text-gray-700">
+                    <div class="flex items-center gap-3 p-4 bg-gray-50 rounded-lg shadow-sm">
+                        <i data-lucide="layers" class="text-blue-500 w-5 h-5"></i>
+                        <div>
+                            <p class="text-sm text-gray-500">SKS</p>
+                            <p class="text-lg font-semibold"><?= htmlspecialchars($user['sks']); ?></p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 text-gray-700">
+                        <div class="flex items-center gap-3 p-4 bg-gray-50 rounded-lg shadow-sm">
+                            <i data-lucide="calendar" class="text-blue-500 w-5 h-5"></i>
+                            <div>
+                                <p class="text-sm text-gray-500">Semester</p>
+                                <p class="text-lg font-semibold"><?= htmlspecialchars($user['semester']); ?></p>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="flex justify-center mt-6">
-                <a href="/project"
-                    class="flex items-center gap-2 bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600 transition">
-                    <i data-lucide="arrow-left"></i> Kembali
-                </a>
+                    <div class="flex justify-center mt-6">
+                        <a href="/project"
+                            class="flex items-center gap-2 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition">
+                            <i data-lucide="arrow-left"></i> Kembali
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

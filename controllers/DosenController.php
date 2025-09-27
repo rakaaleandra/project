@@ -25,13 +25,13 @@ class DosenController
     {
         $this->checkAuth();
         $users = $this->user->all();
-        require_once 'views/dosen/index.php';
+        require_once 'views/dosens/index.php';
     }
 
     public function create()
     {
+        global $pdo;
         $this->checkAuth();
-        global $pdo; 
         require_once 'views/dosens/create.php';
     }
 
@@ -39,29 +39,26 @@ class DosenController
     {
         $this->checkAuth();
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['submit'])) {
-            header('Location: /project/dosen/index');
+            header('Location: /project/dosens/index');
             exit;
         }
 
         if (!$this->auth->validateCsrfToken($_POST['csrf_token'] ?? '')) {
             $errors[] = "CSRF token tidak valid.";
-            require_once 'views/dosen/create.php';
+            require_once 'views/dosens/create.php';
             return;
         }
 
         $data = [
-            'nim' => htmlspecialchars($_POST['nim'] ?? '', ENT_QUOTES, 'UTF-8'),
-            'nama' => htmlspecialchars($_POST['nama'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'nip'    => htmlspecialchars($_POST['nip'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'nama'   => htmlspecialchars($_POST['nama'] ?? '', ENT_QUOTES, 'UTF-8'),
             'alamat' => htmlspecialchars($_POST['alamat'] ?? '', ENT_QUOTES, 'UTF-8'),
         ];
 
         $errors = [];
-        $mahasiswa = $this->user->find($data['nim']);
-        if ($mahasiswa) {
-            $errors[] = "NIM sudah terdaftar.";
-        }
-        if (!is_string($data['nama'])) {
-            $errors[] = "Nama harus berupa teks.";
+        $dosen = $this->user->find($data['nip']);
+        if ($dosen) {
+            $errors[] = "NIP sudah terdaftar.";
         }
         if (empty($data['nama']) || !preg_match('/^[a-zA-Z\s\']+$/', $data['nama'])) {
             $errors[] = "Nama hanya boleh berisi huruf, spasi, atau apostrof.";
@@ -69,66 +66,54 @@ class DosenController
 
         if (!empty($errors)) {
             $old = $data;
-            require_once 'views/dosen/create.php';
+            require_once 'views/dosens/create.php';
             return;
         }
 
         if ($this->user->create($data)) {
-            header('Location: /project');
+            header('Location: /project/dosens/index');
         } else {
             $errors[] = "Gagal menyimpan data.";
             $old = $data;
-            require_once 'views/dosen/create.php';
+            require_once 'views/dosens/create.php';
         }
     }
 
-    public function edit($nip) {
+    public function edit($nip)
+    {
         global $pdo;
         $this->checkAuth();
         $user = $this->user->find($nip);
         if ($user) {
-            require_once 'views/users/edit.php';
+            require_once 'views/dosens/edit.php';
         } else {
-            echo "Pengguna tidak ditemukan.";
+            echo "Dosen tidak ditemukan.";
         }
     }
 
-    public function update($nip) {
+    public function update($nip)
+    {
         $this->checkAuth();
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['submit'])) {
-            header('Location: /project/dosen/index');
+            header('Location: /project/dosens/index');
             exit;
         }
 
         if (!$this->auth->validateCsrfToken($_POST['csrf_token'] ?? '')) {
             $errors[] = "CSRF token tidak valid.";
             $user = $this->user->find($nip);
-            require_once 'views/users/edit.php';
+            require_once 'views/dosens/edit.php';
             return;
         }
 
         $data = [
-            'name' => htmlspecialchars($_POST['name'] ?? '', ENT_QUOTES, 'UTF-8'),
-            'email' => filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL),
-            'phone' => filter_var($_POST['phone'] ?? '', FILTER_SANITIZE_STRING),
-            'password' => $_POST['password'] ?? ''
+            'nama'   => htmlspecialchars($_POST['nama'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'alamat' => htmlspecialchars($_POST['alamat'] ?? '', ENT_QUOTES, 'UTF-8'),
         ];
 
         $errors = [];
-        if (!is_string($data['name'])) {
-            $errors[] = "Nama harus berupa teks.";
-        }
-        if (empty($data['name']) || !preg_match('/^[a-zA-Z\s\']+$/', $data['name'])) {
+        if (empty($data['nama']) || !preg_match('/^[a-zA-Z\s\']+$/', $data['nama'])) {
             $errors[] = "Nama hanya boleh berisi huruf, spasi, atau apostrof.";
-        }
-        if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "Email tidak valid.";
-        }
-        if (!empty($data['phone']) && !preg_match('/^(08|\+62)\d{8,11}$/', $data['phone'])) {
-            $errors[] = "Nomor telepon tidak valid.";
-        }
-        if (!empty($data['password']) && strlen($data['password']) < 8) {
-            $errors[] = "Kata sandi baru minimal 8 karakter.";
         }
 
         if (!empty($errors)) {
@@ -139,19 +124,20 @@ class DosenController
         }
 
         if ($this->user->update($nip, $data)) {
-            header('Location: /project/dosen/index');
+            header('Location: /project/dosens/index');
         } else {
             $errors[] = "Gagal memperbarui data.";
             $old = $data;
-            $user = $this->user->find($id);
-            require_once 'views/users/edit.php';
+            $user = $this->user->find($nip);
+            require_once 'views/dosens/edit.php';
         }
     }
 
-    public function delete($nip) {
+    public function delete($nip)
+    {
         $this->checkAuth();
         if ($this->user->delete($nip)) {
-            header('Location: /project/dosen/index');
+            header('Location: /project/dosens/index');
         } else {
             echo "Gagal menghapus data.";
         }
@@ -162,9 +148,9 @@ class DosenController
         $this->checkAuth();
         $user = $this->user->find($nip);
         if ($user) {
-            require_once 'views/dosen/show.php';
+            require_once 'views/dosens/show.php';
         } else {
-            echo "Pengguna tidak ditemukan.";
+            echo "Dosen tidak ditemukan.";
         }
     }
 }

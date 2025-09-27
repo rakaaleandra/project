@@ -25,8 +25,8 @@ class MataKuliahController {
     }
 
     public function create() {
-        $this->checkAuth();
         global $pdo;
+        $this->checkAuth();
         require_once 'views/matakuliahs/create.php';
     }
 

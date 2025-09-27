@@ -34,7 +34,7 @@ $auth = new Auth($pdo);
                 <div>
                     <label class="block mb-1 font-medium text-gray-700">Kode Mata Kuliah:</label>
                     <div class="flex items-center border rounded px-3 focus-within:ring-2 focus-within:ring-blue-500">
-                        <i data-lucide="hash" class="text-blue-500 w-5 h-5 mr-2"></i>
+                        <i data-lucide="book-text" class="text-blue-500 w-5 h-5 mr-2"></i>
                         <input type="text" name="fk_kode_matkul" value="<?= htmlspecialchars($old['fk_kode_matkul'] ?? $user['fk_kode_matkul']); ?>" required class="w-full py-2 outline-none">
                     </div>
                 </div>

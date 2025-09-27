@@ -23,7 +23,6 @@ $auth = new Auth($pdo);
 
             <form action="/project/dosen/update/<?= $user['nip']; ?>" method="POST" class="space-y-4">
                 <input type="hidden" name="csrf_token" value="<?= $auth->generateCsrfToken(); ?>">
-
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">Nama</label>
                     <div class="flex items-center border rounded-lg px-3 focus-within:ring-2 focus-within:ring-blue-500">
@@ -31,7 +30,6 @@ $auth = new Auth($pdo);
                         <input type="text" name="nama" value="<?= htmlspecialchars($old['nama'] ?? $user['nama']); ?>" required class="w-full py-2 outline-none">
                     </div>
                 </div>
-
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">Alamat</label>
                     <div class="flex items-center border rounded-lg px-3 focus-within:ring-2 focus-within:ring-blue-500">
@@ -39,7 +37,6 @@ $auth = new Auth($pdo);
                         <input type="text" name="alamat" value="<?= htmlspecialchars($old['alamat'] ?? $user['alamat']); ?>" required class="w-full py-2 outline-none">
                     </div>
                 </div>
-
                 <div class="flex justify-center">
                     <button type="submit" name="submit" class="flex items-center gap-2 bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-600 hover:shadow-md transition">
                         <i data-lucide="refresh-ccw"></i> Perbarui
