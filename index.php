@@ -7,6 +7,7 @@ require_once __DIR__ . '/controllers/MahasiswaController.php';
 require_once __DIR__ . '/controllers/MataKuliahController.php';
 require_once __DIR__ . '/controllers/DosenController.php';
 require_once __DIR__ . '/controllers/KuliahController.php';
+require_once __DIR__ . '/controllers/PrivateController.php';
 
 $controller = new UserController($pdo);
 $authController = new AuthController($pdo);
@@ -14,6 +15,7 @@ $mahasiswaController = new MahasiswaController($pdo);
 $dosenController = new DosenController($pdo);
 $mataKuliahController = new MataKuliahController($pdo);
 $kuliahController = new KuliahController($pdo);
+$privateController = new PrivateController($pdo);
 
 $url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
 $url = explode('/', $url);
@@ -22,6 +24,26 @@ $action = isset($url[0]) && !empty($url[0]) ? $url[0] : 'index';
 $id = isset($url[1]) ? $url[1] : null;
 
 switch ($action) {
+    case 'private':
+        if(isset($url[1]) && $url[1] === 'mahasiswa') {
+            $privateController->mahasiswa();
+            break;
+        }
+        if(isset($url[1]) && $url[1] === 'dosen') {
+            $privateController->dosen();
+            break;
+        }
+        if(isset($url[1]) && $url[1] === 'matakuliah') {
+            $privateController->matakuliah();
+            break;
+        }
+        if(isset($url[1]) && $url[1] === 'kuliah') {
+            $privateController->kuliah();
+            break;
+        }
+        $privateController->all();
+        break;
+
     case 'login':
         $authController->login();
         break;
